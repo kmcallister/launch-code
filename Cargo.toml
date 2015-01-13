@@ -1,0 +1,16 @@
+[package]
+
+name = "launch-code"
+version = "0.0.0"
+repository = "https://github.com/kmcallister/launch-code"
+readme = "README.md"
+license = "MIT/Apache-2.0"
+authors = ["Keegan McAllister <mcallister.keegan@gmail.com>"]
+description = "Cryptographic signatures for unsafe code auditing"
+
+[lib]
+name = "launch_code"
+plugin = true
+
+[dependencies.sodiumoxide]
+git = "https://github.com/kmcallister/sodiumoxide"
