@@ -4,7 +4,6 @@
 #![allow(unstable)]
 
 extern crate syntax;
-extern crate serialize;
 extern crate sodiumoxide;
 #[macro_use] extern crate rustc;
 
