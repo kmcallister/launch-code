@@ -16,8 +16,7 @@ as every `fn` that contains an `unsafe` block.
 #[plugin(public_key="examples/pubkey")]
 extern crate launch_code;
 
-#[launch_code="EFu+75O1lkbIBzj8gaawt2uZOzqXu/cL+FDCXAdNgZec\
-               ImL1KTJIiIJR9+myloNTBPQpeXglsa18IftlnJRMBQ=="]
+#[launch_code="⠐⡛⢾⣯⢓⢵⢖⡆⣈⠇⠸⣼⢁⢦⢰⢷⡫⢙⠻⠺⢗⢻⣷⠋⣸⡐⣂⡜⠇⡍⢁⢗⢜⠢⡢⣵⠩⠲⡈⢈⢂⡑⣷⣩⢲⢖⢃⡓⠄⣴⠩⡹⡸⠥⢱⢭⡼⠡⣻⡥⢜⢔⡌⠅"]
 fn totally_fine() -> u64 {
     unsafe {
         *std::ptr::null()
@@ -25,15 +24,17 @@ fn totally_fine() -> u64 {
 }
 ```
 
-The "launch code" is a Base64-encoded [Ed25519][] signature of the whole `fn
-... { ... }` block, plus the function's attributes, other than `launch_code`
-itself.  This is computed from the original source files, so it authenticates
-comments and formatting as well as the code's behavior.  The Ed25519
-implementation is [libsodium][] via [Sodium Oxide][].
+The "launch code" is an [Ed25519][] signature of the whole `fn ... { ... }`
+block, plus the function's attributes, other than `launch_code` itself.  This
+is computed from the original source files, so it authenticates comments and
+formatting as well as the code's behavior.  The Ed25519 implementation is
+[libsodium][] via [Sodium Oxide][].  The signature is encoded using Unicode's
+[braille characters][].
 
-[Ed25519]:      http://ed25519.cr.yp.to/
-[libsodium]:    https://github.com/jedisct1/libsodium
-[Sodium Oxide]: https://github.com/dnaq/sodiumoxide
+[Ed25519]:            http://ed25519.cr.yp.to/
+[libsodium]:          https://github.com/jedisct1/libsodium
+[Sodium Oxide]:       https://github.com/dnaq/sodiumoxide
+[braille characters]: http://en.wikipedia.org/wiki/Braille_Patterns
 
 This is a **proof of concept only**.  My only security guarantee is that I
 guarantee there's a rather obvious [backdoor][] in the library, to deter people
