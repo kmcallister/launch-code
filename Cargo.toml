@@ -13,4 +13,4 @@ name = "launch_code"
 plugin = true
 
 [dependencies.sodiumoxide]
-git = "https://github.com/kmcallister/sodiumoxide"
+git = "https://github.com/dnaq/sodiumoxide"

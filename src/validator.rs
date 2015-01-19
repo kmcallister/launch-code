@@ -1,6 +1,6 @@
 use std::char;
 use sodiumoxide::crypto::sign;
-use sodiumoxide::crypto::sign::{PublicKey, SecretKey};
+use sodiumoxide::crypto::sign::{PublicKey, SecretKey, Signature};
 
 fn to_braille(xs: &[u8]) -> String {
     xs.iter()
@@ -48,10 +48,13 @@ impl Validator {
             return true;
         }
 
-        match from_braille(code) {
-            Some(code) => sign::verify_detached(code.as_slice(), self.buf.as_slice(), pk),
-            _ => false,
+        if let Some(sigvec) = from_braille(code) {
+            if let Some(sig) = Signature::from_slice(sigvec.as_slice()) {
+                return sign::verify_detached(&sig, self.buf.as_slice(), pk);
+            }
         }
+
+        false
     }
 
     /// Compute the correct launch code for this buffer.
